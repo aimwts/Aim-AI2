@@ -11,7 +11,9 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     // Define process.env global so it's available in the browser
     define: {
-      'process.env': env
+      // IMPORTANT: JSON.stringify is required here. 
+      // Without it, Vite inserts [object Object] into the code, causing a syntax error.
+      'process.env': JSON.stringify(env),
     },
     build: {
       outDir: 'dist',
